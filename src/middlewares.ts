@@ -2,14 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { market } from "./database";
 import { IProduct, IFoodProduct } from "./interfaces";
 
-export const httpRequest = (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-): void => {
-    console.log(`${req.method} ---> ${req.url}`)
-    return next()
-}
 
 export const verifyIfIdExists = (
     req: Request,

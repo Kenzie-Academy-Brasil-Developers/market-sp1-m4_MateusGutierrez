@@ -1,10 +1,9 @@
 import express, { Application } from "express"
 import { createProducts, deleteProducts, getProduct, readProducts, updateProduct } from "./logics"
-import { httpRequest, verifyIfIdExists, verifyIfNameExists } from "./middlewares"
+import {  verifyIfIdExists, verifyIfNameExists } from "./middlewares"
 
 const  app: Application = express()
 app.use(express.json())
-app.use(httpRequest)
 
 app.post("/products", verifyIfNameExists,createProducts)
 

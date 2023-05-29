@@ -6,7 +6,14 @@ export interface IProduct{
     section: string,
     expirationDate: string,
 }
-
+export interface ICleanProduct{
+    id: number,
+    name: string,
+    price: number,
+    weight: number,
+    section: string,
+    expirationDate: string,
+}
 export interface IFoodProduct extends IProduct{
     calories: number;
 }

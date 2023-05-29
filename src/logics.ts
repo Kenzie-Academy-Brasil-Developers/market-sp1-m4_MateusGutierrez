@@ -1,10 +1,10 @@
 import { Response, Request } from "express"
-import { IFoodProduct, IProduct, TProductCreate, TProductUpdate } from "./interfaces"
+import { ICleanProduct, IFoodProduct, IProduct, TProductCreate, TProductUpdate } from "./interfaces"
 import { market, marketCreate, superMarket } from "./database"
 
 
 const getNextId = (): number => {
-    const lastProduct: IProduct | IFoodProduct | undefined = market
+    const lastProduct: IProduct | ICleanProduct | IFoodProduct | undefined = market
     .sort((a, b): number => a.id - b.id)
     .at(-1)
     if(!lastProduct) return 1
@@ -26,7 +26,7 @@ export const createProducts = (req: Request, res: Response): Response => {
     const total = payload.reduce((acc, val) => acc + val.price, 0)
     
     payload.forEach((product) => {
-        const newProduct: IProduct | IFoodProduct = {
+        const newProduct: IProduct | ICleanProduct | IFoodProduct = {
             ...product,
             id: getNextId(),
             expirationDate: (nextYearDate).toISOString(), 
@@ -55,8 +55,7 @@ export const readProducts = (req: Request, res: Response): Response => {
 
 export const getProduct = (req: Request, res: Response): Response => {
     const {indexProduct} = res.locals
-    console.log(indexProduct)
-    const product: IProduct | IFoodProduct = market[indexProduct] 
+    const product: IProduct | ICleanProduct | IFoodProduct = market[indexProduct] 
 
     return res.json(product)
 }
